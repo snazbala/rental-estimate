@@ -1,3 +1,7 @@
+Rental Estimate
+
+This app allows the user to provide information about their property and receive back a rental estimate.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
