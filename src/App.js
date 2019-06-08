@@ -1,40 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
 import EstimatePage from './pages/estimate/EstimatePage';
 import AdminPage from './pages/admin/AdminPage';
 import './App.css';
 
-const Home = () => {
-    return (
-        <div>
-            <h2>Home</h2>
-        </div>
-    );
+const menuStyles = {
+    textAlign: 'center',
+    margin: '20px 0px 20px 0px',
+    fontWeight: '100',
+};
+
+const listStyles = {
+    listStyleType: 'none',
+    display: 'flex',
+    justifyContent: 'space-around',
 };
 
 const Menu = () => (
-    <div>
-        <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/estimate">Get an Estimate</Link>
-            </li>
-            <li>
-                <Link to="/admin">AdminPage</Link>
-            </li>
+    <nav style={menuStyles}>
+        <ul style={listStyles}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
         </ul>
-        <hr />
-    </div>
-)
+    </nav>
+);
 
 const App = () => (
     <Router>
         <div>
             <Menu />
-            <Route exact path="/" component={Home} />
-            <Route path="/estimate" component={EstimatePage} />
+            <hr />
+            <Route exact path="/" component={EstimatePage} />
             <Route path="/admin" component={AdminPage} />
         </div>
     </Router>

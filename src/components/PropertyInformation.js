@@ -1,0 +1,115 @@
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = () => ({
+    selectField: {
+        margin: '-15px 15px 15px 20px',
+    },
+    sqFtField: {
+        margin: '-15px 15px 0px 20px',
+        width: '150px',
+    },
+});
+
+const getMenuItems = (max, placeholder) => {
+    const menuItems = [];
+
+    if (placeholder) {
+        menuItems.push(
+            <MenuItem value="" disabled key="placeholder">{placeholder}</MenuItem>
+        )
+    }
+
+    for (let i = 0; i <= max; i++) {
+        menuItems.push(
+            <MenuItem value={i} key={i}>{i}</MenuItem>
+        );
+    }
+
+    return menuItems;
+}
+
+const NumBedrooms = ({value, onChange, style}) => {
+    const menuItems = getMenuItems(10, "# Bedrooms");
+
+    return (
+        <FormControl className={style}>
+            <h4># of Bedrooms</h4>
+            <Select
+                value={value}
+                onChange={onChange('numBedrooms')}
+                input={<OutlinedInput name="numBedrooms" id="numBedrooms" />}
+                required={true}
+            >
+                {menuItems}
+            </Select>
+        </FormControl>
+    );
+};
+
+const NumBathrooms = ({value, onChange, style}) => {
+    const menuItems = getMenuItems(10, "# Bathrooms");
+
+    return (
+        <FormControl className={style}>
+            <h4># of Bathrooms</h4>
+            <Select
+                value={value}
+                onChange={onChange('numBathrooms')}
+                input={<OutlinedInput name="numBathrooms" id="numBathrooms" />}
+                required={true}
+            >
+                {menuItems}
+            </Select>
+        </FormControl>
+    );
+};
+
+const SquareFootage = ({value, onChange, style}) => (
+    <FormControl className={style}>
+        <h4>Square Ft</h4>
+        <TextField
+            name="Square Footage"
+            label="Square Ft"
+            value={value}
+            placeholder="950"
+            variant="outlined"
+            onChange={onChange('sqFt')}
+            required={true}
+        />
+    </FormControl>
+);
+
+const PropertyInformation = ({numBedrooms, numBathrooms, sqFt, onChange, classes}) => (
+    <Grid container className="property-information__container">
+        <Grid item xs={12}>
+            <NumBedrooms
+                className="property-information__num-beds"
+                value={numBedrooms}
+                onChange={onChange}
+                style={classes.selectField}
+            />
+            <NumBathrooms
+                className="property-information__num-baths"
+                value={numBathrooms}
+                onChange={onChange}
+                style={classes.selectField}
+            />
+            <SquareFootage
+                className="property-information__sq-ft"
+                value={sqFt}
+                onChange={onChange}
+                style={classes.sqFtField}
+            />
+        </Grid>
+    </Grid>
+);
+
+export default withStyles(styles)(PropertyInformation);
+

@@ -3,89 +3,94 @@ import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-const styles = (theme) => ({
-  inputField: {
-    margin: '20px',
-  },
+const styles = () => ({
+    inputField: {
+        margin: '0px 20px 20px 20px',
+    },
 });
 
 const Address1 = ({value, onChange, style}) => (
     <TextField
         className={classNames(
-            'estimate-page__address1',
+            'address-fields__address1',
             style,
         )}
         name="Address 1"
         label="Address 1"
         fullWidth={true}
         value={value}
-        placeholder="123 Main Street"
+        placeholder="12 Bagshot Row"
         variant="outlined"
         onChange={onChange('address1')}
+        required={true}
     />
 );
 
 const Address2 = ({value, onChange, style}) => (
     <TextField
         className={classNames(
-            'estimate-page__address2',
+            'address-fields__address2',
             style,
         )}
         name="Address 2"
         label="Address 2"
         fullWidth={true}
         value={value}
-        placeholder="Unit 2"
+        placeholder="Hole #2"
         variant="outlined"
         onChange={onChange('address2')}
+        required={true}
     />
 );
 
 const City = ({value, onChange, style}) => (
     <TextField
         className={classNames(
-            'estimate-page__city',
+            'address-fields__city',
             style,
         )}
         name="City"
         label="City"
         fullWidth={true}
         value={value}
-        placeholder="Seattle"
+        placeholder="Hobbiton"
         variant="outlined"
         onChange={onChange('city')}
+        required={true}
     />
 );
 
 const State = ({value, onChange, style}) => (
     <TextField
         className={classNames(
-            'estimate-page__state',
+            'address-fields__state',
             style,
         )}
         name="State"
         label="State"
         fullWidth={true}
         value={value}
-        placeholder="Washington"
+        placeholder="The Shire"
         variant="outlined"
         onChange={onChange('state')}
+        required={true}
     />
 );
 
 const ZipCode = ({value, onChange, style}) => (
     <TextField
         className={classNames(
-            'estimate-page__zip-code',
+            'address-fields__zip-code',
             style,
         )}
         name="Zip Code"
         label="Zip Code"
         fullWidth={true}
         value={value}
-        placeholder="98296"
+        placeholder="12345"
         variant="outlined"
         onChange={onChange('zipCode')}
+        required={true}
     />
 );
 
