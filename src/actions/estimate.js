@@ -35,7 +35,6 @@ const getOffer = (estimate) => {
 }
 
 export const getEstimateAction = (formData) => async (dispatch) => {
-    debugger;
     const estimateData = await getEstimateApi(formData);
 
     const offer = getOffer(estimateData.estimate);

@@ -34,7 +34,6 @@ const Address2 = ({value, onChange}) => (
         placeholder="Hole #2"
         variant="outlined"
         onChange={onChange('address2')}
-        required={true}
     />
 );
 
