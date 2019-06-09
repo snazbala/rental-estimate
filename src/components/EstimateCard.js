@@ -7,11 +7,15 @@ const styles = {
     card: {
         qualified: {
             marginTop: '20px',
-            backgroundColor: '#aad87f',
+            backgroundColor: '#36a04c',
+            color: 'white',
+            fontWeight: '500'
         },
         notQualified: {
             marginTop: '20px',
-            backgroundColor: '#fcf7b3',
+            backgroundColor: '#bf4203',
+            color: 'white',
+            fontWeight: '500'
         },
     },
 };
@@ -22,7 +26,7 @@ const EstimateCard = ({isQualified, estimateAmount}) => {
 
     if (isQualified) {
         style = styles.card.qualified;
-        text = `Congrats! We can offer you a monthly rent of ${estimateAmount}.`;
+        text = `Congrats! We can offer you a monthly rent of $${estimateAmount}.`;
     } else {
         style = styles.card.notQualified;
         text = 'Sorry, but we are unable to make an offer on this property.'
@@ -39,7 +43,7 @@ const EstimateCard = ({isQualified, estimateAmount}) => {
 
 EstimateCard.propTypes = {
     isQualified: PropTypes.bool.isRequired,
-    estimateAmount: PropTypes.string,
+    estimateAmount: PropTypes.number,
 };
 
 export default EstimateCard;

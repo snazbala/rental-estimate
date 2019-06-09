@@ -40,7 +40,7 @@ const NumBedrooms = ({value, onChange}) => {
 
     return (
         <FormControl style={styles.selectField}>
-            <h4># of Bedrooms</h4>
+            <h4># of Bedrooms*</h4>
             <Select
                 value={value}
                 onChange={onChange('numBedrooms')}
@@ -58,7 +58,7 @@ const NumBathrooms = ({value, onChange}) => {
 
     return (
         <FormControl style={styles.selectField}>
-            <h4># of Bathrooms</h4>
+            <h4># of Bathrooms*</h4>
             <Select
                 value={value}
                 onChange={onChange('numBathrooms')}
@@ -73,7 +73,7 @@ const NumBathrooms = ({value, onChange}) => {
 
 const SquareFootage = ({value, onChange}) => (
     <FormControl style={styles.sqFtField}>
-        <h4>Square Ft</h4>
+        <h4>Square Ft*</h4>
         <TextField
             name="Square Footage"
             label="Square Ft"

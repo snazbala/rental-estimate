@@ -29,14 +29,15 @@ const styles = {
         margin: '27px 0px 50px 0px',
         width: '250px',
     },
-    header: {
+    subtitle: {
+        marginBottom: '40px',
     },
     title: {
-        margin: '40px 0px 40px 0px',
+        margin: '40px 0px 20px 0px',
     },
 };
 
-class EstimatePage extends React.Component {
+export class EstimatePage extends React.Component {
     state = EMPTY_FORM_STATE;
 
     _handleAddressFieldChange = (name) => (e) => {
@@ -85,7 +86,7 @@ class EstimatePage extends React.Component {
 
         let estimate;
 
-        if (this.state.estimate) {
+        if (isQualified !== undefined) {
             estimate = <EstimateCard isQualified={isQualified} estimateAmount={estimateAmount} />
         }
 
@@ -94,9 +95,9 @@ class EstimatePage extends React.Component {
                 <Grid container justify="center">
                     <Grid item xs={10} md={6} xl={4}>
                         <h2 style={styles.title}>Get a rental estimate for your home!</h2>
+                        <p style={styles.subtitle}>Enter information about your property to see the monthly rent we can offer you.</p>
                         <form>
                             <h3 style={styles.header}>Your Information</h3>
-                            <p>Enter information about your property to see the monthly rent we can offer you.</p>
                             <ContactInformation
                                 value={emailAddress}
                                 onChange={this._handleChange}

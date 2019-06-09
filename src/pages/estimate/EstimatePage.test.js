@@ -1,5 +1,5 @@
 import React from 'react';
-import EstimatePage from './EstimatePage';
+import {EstimatePage} from './EstimatePage';
 import {mount} from 'enzyme';
 
 const mountedEstimatePage = (overrideProps) => (
