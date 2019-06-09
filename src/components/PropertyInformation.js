@@ -5,17 +5,16 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import {withStyles} from '@material-ui/core/styles';
 
-const styles = () => ({
+const styles = {
     selectField: {
-        margin: '-15px 15px 15px 20px',
+        margin: '-15px 15px 15px 0px',
     },
     sqFtField: {
-        margin: '-15px 15px 0px 20px',
+        marginTop: '-15px',
         width: '150px',
     },
-});
+};
 
 const getMenuItems = (max, placeholder) => {
     const menuItems = [];
@@ -35,11 +34,11 @@ const getMenuItems = (max, placeholder) => {
     return menuItems;
 }
 
-const NumBedrooms = ({value, onChange, style}) => {
+const NumBedrooms = ({value, onChange}) => {
     const menuItems = getMenuItems(10, "# Bedrooms");
 
     return (
-        <FormControl className={style}>
+        <FormControl style={styles.selectField}>
             <h4># of Bedrooms</h4>
             <Select
                 value={value}
@@ -53,11 +52,11 @@ const NumBedrooms = ({value, onChange, style}) => {
     );
 };
 
-const NumBathrooms = ({value, onChange, style}) => {
+const NumBathrooms = ({value, onChange}) => {
     const menuItems = getMenuItems(10, "# Bathrooms");
 
     return (
-        <FormControl className={style}>
+        <FormControl style={styles.selectField}>
             <h4># of Bathrooms</h4>
             <Select
                 value={value}
@@ -71,8 +70,8 @@ const NumBathrooms = ({value, onChange, style}) => {
     );
 };
 
-const SquareFootage = ({value, onChange, style}) => (
-    <FormControl className={style}>
+const SquareFootage = ({value, onChange}) => (
+    <FormControl style={styles.sqFtField}>
         <h4>Square Ft</h4>
         <TextField
             name="Square Footage"
@@ -86,30 +85,27 @@ const SquareFootage = ({value, onChange, style}) => (
     </FormControl>
 );
 
-const PropertyInformation = ({numBedrooms, numBathrooms, sqFt, onChange, classes}) => (
+const PropertyInformation = ({numBedrooms, numBathrooms, sqFt, onChange}) => (
     <Grid container className="property-information__container">
         <Grid item xs={12}>
             <NumBedrooms
                 className="property-information__num-beds"
                 value={numBedrooms}
                 onChange={onChange}
-                style={classes.selectField}
             />
             <NumBathrooms
                 className="property-information__num-baths"
                 value={numBathrooms}
                 onChange={onChange}
-                style={classes.selectField}
             />
             <SquareFootage
                 className="property-information__sq-ft"
                 value={sqFt}
                 onChange={onChange}
-                style={classes.sqFtField}
             />
         </Grid>
     </Grid>
 );
 
-export default withStyles(styles)(PropertyInformation);
+export default PropertyInformation;
 

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 const styles = () => ({
     inputField: {
-        margin: '0px 20px 20px 20px',
+        marginBottom: '20px',
     },
 });
 

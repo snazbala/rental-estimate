@@ -1,8 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import {withStyles} from '@material-ui/core/styles';
 
 import ContactInformation from '../../components/ContactInformation';
 import AddressFields from '../../components/AddressFields';
@@ -22,21 +20,17 @@ const EMPTY_FORM_STATE = {
     sqFt: '',
 };
 
-const styles = () => ({
-    emailField: {
-        margin: '0px 20px 20px 20px',
-    },
+const styles = {
     submitButton: {
-        margin: '27px 20px',
+        margin: '27px 0px 50px 0px',
         width: '250px',
     },
     header: {
-        margin: '20px',
     },
     title: {
-        margin: '40px 20px 40px 20px',
+        margin: '40px 0px 40px 0px',
     },
-});
+};
 
 class EstimatePage extends React.Component {
     state = EMPTY_FORM_STATE;
@@ -74,21 +68,19 @@ class EstimatePage extends React.Component {
     }
 
     render() {
-        const {classes} = this.props;
-
         return (
             <div className="estimate-page__container">
                 <Grid container justify="center">
                     <Grid item xs={10} md={6} xl={4}>
-                        <h2 className={classes.title}>Get a rental estimate for your home!</h2>
+                        <h2 style={styles.title}>Get a rental estimate for your home!</h2>
                         <form>
-                            <h3 className={classes.header}>Your Information</h3>
+                            <h3 style={styles.header}>Your Information</h3>
+                            <p>Enter information about your property to see the monthly rent we can offer you.</p>
                             <ContactInformation
                                 value={this.state.emailAddress}
                                 onChange={this._handleChange}
-                                classes={classes}
                             />
-                            <h3 className={classes.header}>Property Address</h3>
+                            <h3 style={styles.header}>Property Address</h3>
                             <AddressFields
                                 address1={this.state.address.address1}
                                 address2={this.state.address.address2}
@@ -97,7 +89,7 @@ class EstimatePage extends React.Component {
                                 zipCode={this.state.address.zipCode}
                                 onChange={this._handleAddressFieldChange}
                             />
-                            <h3 className={classes.header}>Property Information</h3>
+                            <h3 style={styles.header}>Property Information</h3>
                             <PropertyInformation
                                 numBedrooms={this.state.numBedrooms}
                                 numBathrooms={this.state.numBathrooms}
@@ -106,10 +98,8 @@ class EstimatePage extends React.Component {
                             />
                             <div>
                                 <Button
-                                    className={classNames(
-                                        "estimate-page__submit-button",
-                                        classes.submitButton,
-                                    )}
+                                    className="estimate-page__submit-button"
+                                    style={styles.submitButton}
                                     variant="contained"
                                     color="primary"
                                     onClick={this._handleSubmit}
@@ -125,4 +115,4 @@ class EstimatePage extends React.Component {
     }
 }
 
-export default withStyles(styles)(EstimatePage);
+export default EstimatePage;

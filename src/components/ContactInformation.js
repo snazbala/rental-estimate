@@ -1,13 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import classNames from 'classnames';
 
-const ContactInformation = ({classes, value, onChange}) => (
+const ContactInformation = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'contact-information__email',
-            classes.emailField,
-        )}
+        className="contact-information__email"
+        style={{marginBottom: '20px'}}
         type="email"
         name="Email Address"
         label="Email Address"
