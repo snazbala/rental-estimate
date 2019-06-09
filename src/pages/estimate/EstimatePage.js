@@ -8,7 +8,7 @@ import AddressFields from '../../components/AddressFields';
 import PropertyInformation from '../../components/PropertyInformation';
 import EstimateCard from '../../components/EstimateCard';
 
-import {simpleAction} from '../../actions/action';
+import {getEstimateAction} from '../../actions/estimate';
 
 const EMPTY_FORM_STATE = {
     emailAddress: '',
@@ -37,10 +37,7 @@ const styles = {
 };
 
 class EstimatePage extends React.Component {
-    state = {
-        ...EMPTY_FORM_STATE,
-        estimate: false,
-    }
+    state = EMPTY_FORM_STATE;
 
     _handleAddressFieldChange = (name) => (e) => {
         this.setState({
@@ -62,12 +59,8 @@ class EstimatePage extends React.Component {
     }
 
     _handleSubmit = () => {
-        this.setState({
-            ...EMPTY_FORM_STATE,
-            estimate: true,
-            isQualified: false,
-            estimateAmount: '$3,000',
-        });
+        this.props.onSubmit(this.state);
+        this.setState({...EMPTY_FORM_STATE});
     }
 
     render() {
@@ -80,12 +73,15 @@ class EstimatePage extends React.Component {
                 zipCode,
             },
             emailAddress,
-            estimateAmount,
-            isQualified,
             numBathrooms,
             numBedrooms,
             sqFt,
         } = this.state;
+
+        const {
+            estimateAmount,
+            isQualified,
+        } = this.props;
 
         let estimate;
 
@@ -142,11 +138,12 @@ class EstimatePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    ...state,
+   estimateAmount: state.app.estimateAmount,
+   isQualified: state.app.isQualified,
 });
 
 const mapDispatchToProps = dispatch => ({
-    simpleAction: () => dispatch(simpleAction()),
+    onSubmit: (formData) => dispatch(getEstimateAction(formData)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EstimatePage);

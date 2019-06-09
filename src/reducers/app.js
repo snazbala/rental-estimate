@@ -1,9 +1,15 @@
 export default (state = {}, action) => {
     switch (action.type) {
-        case 'SIMPLE_ACTION':
+        case 'SAVE_ESTIMATE_AMOUNT':
             return {
-                result: action.payload,
+                ...state,
+                estimateAmount: action.payload,
             };
+        case 'SAVE_IS_QUALIFIED':
+            return {
+                ...state,
+                isQualified: action.payload,
+            }
         default:
             return state;
     }
