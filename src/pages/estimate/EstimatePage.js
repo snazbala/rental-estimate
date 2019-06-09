@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
@@ -7,6 +7,8 @@ import ContactInformation from '../../components/ContactInformation';
 import AddressFields from '../../components/AddressFields';
 import PropertyInformation from '../../components/PropertyInformation';
 import EstimateCard from '../../components/EstimateCard';
+
+import {simpleAction} from '../../actions/action';
 
 const EMPTY_FORM_STATE = {
     emailAddress: '',
@@ -139,8 +141,12 @@ class EstimatePage extends React.Component {
     }
 }
 
-// EstimatePage.PropTypes = {
+const mapStateToProps = (state) => ({
+    ...state,
+});
 
-// }
+const mapDispatchToProps = dispatch => ({
+    simpleAction: () => dispatch(simpleAction()),
+})
 
-export default EstimatePage;
+export default connect(mapStateToProps, mapDispatchToProps)(EstimatePage);
