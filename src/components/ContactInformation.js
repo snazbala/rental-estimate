@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
 const ContactInformation = ({value, onChange}) => (
@@ -16,5 +17,10 @@ const ContactInformation = ({value, onChange}) => (
         required={true}
     />
 );
+
+ContactInformation.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 export default ContactInformation;

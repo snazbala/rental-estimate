@@ -1,10 +1,12 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import ContactInformation from '../../components/ContactInformation';
 import AddressFields from '../../components/AddressFields';
 import PropertyInformation from '../../components/PropertyInformation';
+import EstimateCard from '../../components/EstimateCard';
 
 const EMPTY_FORM_STATE = {
     emailAddress: '',
@@ -15,8 +17,8 @@ const EMPTY_FORM_STATE = {
         state: '',
         zipCode: '',
     },
-    numBedrooms: '',
-    numBathrooms: '',
+    numBedrooms: 0,
+    numBathrooms: 0,
     sqFt: '',
 };
 
@@ -33,7 +35,10 @@ const styles = {
 };
 
 class EstimatePage extends React.Component {
-    state = EMPTY_FORM_STATE;
+    state = {
+        ...EMPTY_FORM_STATE,
+        estimate: false,
+    }
 
     _handleAddressFieldChange = (name) => (e) => {
         this.setState({
@@ -55,19 +60,37 @@ class EstimatePage extends React.Component {
     }
 
     _handleSubmit = () => {
-        console.log(this.state.emailAddress);
-        console.log(this.state.address.address1);
-        console.log(this.state.address.address2);
-        console.log(this.state.address.city);
-        console.log(this.state.address.state);
-        console.log(this.state.address.zipCode);
-        console.log(this.state.numBedrooms);
-        console.log(this.state.numBathrooms);
-        console.log(this.state.sqFt);
-        this.setState(EMPTY_FORM_STATE);
+        this.setState({
+            ...EMPTY_FORM_STATE,
+            estimate: true,
+            isQualified: false,
+            estimateAmount: '$3,000',
+        });
     }
 
     render() {
+        const {
+            address: {
+                address1,
+                address2,
+                city,
+                state,
+                zipCode,
+            },
+            emailAddress,
+            estimateAmount,
+            isQualified,
+            numBathrooms,
+            numBedrooms,
+            sqFt,
+        } = this.state;
+
+        let estimate;
+
+        if (this.state.estimate) {
+            estimate = <EstimateCard isQualified={isQualified} estimateAmount={estimateAmount} />
+        }
+
         return (
             <div className="estimate-page__container">
                 <Grid container justify="center">
@@ -77,25 +100,26 @@ class EstimatePage extends React.Component {
                             <h3 style={styles.header}>Your Information</h3>
                             <p>Enter information about your property to see the monthly rent we can offer you.</p>
                             <ContactInformation
-                                value={this.state.emailAddress}
+                                value={emailAddress}
                                 onChange={this._handleChange}
                             />
                             <h3 style={styles.header}>Property Address</h3>
                             <AddressFields
-                                address1={this.state.address.address1}
-                                address2={this.state.address.address2}
-                                city={this.state.address.city}
-                                state={this.state.address.state}
-                                zipCode={this.state.address.zipCode}
+                                address1={address1}
+                                address2={address2}
+                                city={city}
+                                state={state}
+                                zipCode={zipCode}
                                 onChange={this._handleAddressFieldChange}
                             />
                             <h3 style={styles.header}>Property Information</h3>
                             <PropertyInformation
-                                numBedrooms={this.state.numBedrooms}
-                                numBathrooms={this.state.numBathrooms}
-                                sqFt={this.state.sqFt}
+                                numBedrooms={numBedrooms}
+                                numBathrooms={numBathrooms}
+                                sqFt={sqFt}
                                 onChange={this._handleChange}
                             />
+                            {estimate}
                             <div>
                                 <Button
                                     className="estimate-page__submit-button"
@@ -114,5 +138,9 @@ class EstimatePage extends React.Component {
         );
     }
 }
+
+// EstimatePage.PropTypes = {
+
+// }
 
 export default EstimatePage;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -106,6 +107,13 @@ const PropertyInformation = ({numBedrooms, numBathrooms, sqFt, onChange}) => (
         </Grid>
     </Grid>
 );
+
+PropertyInformation.propTypes = {
+    numBedrooms: PropTypes.number.isRequired,
+    numBathrooms: PropTypes.number.isRequired,
+    sqFt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 export default PropertyInformation;
 

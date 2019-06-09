@@ -1,20 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import {withStyles} from '@material-ui/core/styles';
-import classNames from 'classnames';
 
-const styles = () => ({
+const styles = {
     inputField: {
         marginBottom: '20px',
     },
-});
+};
 
-const Address1 = ({value, onChange, style}) => (
+const Address1 = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'address-fields__address1',
-            style,
-        )}
+        className="address-fields__address1"
+        style={styles.inputField}
         name="Address 1"
         label="Address 1"
         fullWidth={true}
@@ -26,12 +23,10 @@ const Address1 = ({value, onChange, style}) => (
     />
 );
 
-const Address2 = ({value, onChange, style}) => (
+const Address2 = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'address-fields__address2',
-            style,
-        )}
+        className="address-fields__address2"
+        style={styles.inputField}
         name="Address 2"
         label="Address 2"
         fullWidth={true}
@@ -43,12 +38,10 @@ const Address2 = ({value, onChange, style}) => (
     />
 );
 
-const City = ({value, onChange, style}) => (
+const City = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'address-fields__city',
-            style,
-        )}
+        className="address-fields__city"
+        style={styles.inputField}
         name="City"
         label="City"
         fullWidth={true}
@@ -60,12 +53,10 @@ const City = ({value, onChange, style}) => (
     />
 );
 
-const State = ({value, onChange, style}) => (
+const State = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'address-fields__state',
-            style,
-        )}
+        className="address-fields__state"
+        style={styles.inputField}
         name="State"
         label="State"
         fullWidth={true}
@@ -77,12 +68,10 @@ const State = ({value, onChange, style}) => (
     />
 );
 
-const ZipCode = ({value, onChange, style}) => (
+const ZipCode = ({value, onChange}) => (
     <TextField
-        className={classNames(
-            'address-fields__zip-code',
-            style,
-        )}
+        className="address-fields__zip-code"
+        style={styles.inputField}
         name="Zip Code"
         label="Zip Code"
         fullWidth={true}
@@ -94,14 +83,23 @@ const ZipCode = ({value, onChange, style}) => (
     />
 );
 
-const AddressFields = ({address1, address2, city, state, zipCode, onChange, classes}) => (
+const AddressFields = ({address1, address2, city, state, zipCode, onChange}) => (
     <div>
-        <Address1 value={address1} onChange={onChange} style={classes.inputField} />
-        <Address2 value={address2} onChange={onChange} style={classes.inputField} />
-        <City value={city} onChange={onChange} style={classes.inputField} />
-        <State value={state} onChange={onChange} style={classes.inputField} />
-        <ZipCode value={zipCode} onChange={onChange} style={classes.inputField} />
+        <Address1 value={address1} onChange={onChange} />
+        <Address2 value={address2} onChange={onChange} />
+        <City value={city} onChange={onChange} />
+        <State value={state} onChange={onChange} />
+        <ZipCode value={zipCode} onChange={onChange} />
     </div>
 );
 
-export default withStyles(styles)(AddressFields);
+AddressFields.propTypes = {
+    address1: PropTypes.string.isRequired,
+    address2: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zipCode: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+export default AddressFields;
