@@ -30,8 +30,9 @@ const saveOfferHistory = (offers) => ({
 * the negative case in the UI.
 */
 const getRandomizedOffer = (offer) => {
-    const randomizer = Math.floor(Math.random() * Math.floor(2));
-    if (randomizer) {
+    const randomizer = Math.floor(Math.random() * Math.floor(10));
+
+    if (randomizer > 2) {
         return offer
     }
     return 0;
