@@ -5,23 +5,9 @@ import OfferPage from './pages/offer/OfferPage';
 import AdminPage from './pages/admin/AdminPage';
 import './App.css';
 
-// TODO: move styles to css
-const styles = {
-    menu: {
-        textAlign: 'center',
-        margin: '20px 0px 20px 0px',
-        fontWeight: '100',
-    },
-    list: {
-        listStyleType: 'none',
-        display: 'flex',
-        justifyContent: 'space-around',
-    },
-};
-
 const Menu = () => (
-    <nav style={styles.menu}>
-        <ul style={styles.list}>
+    <nav className="app__menu">
+        <ul className="app__list">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/admin">Admin</Link></li>
         </ul>

@@ -12,13 +12,18 @@ const mountedAdminPage = (overrideProps) => (
 );
 
 describe('admin page', () => {
+    let wrapper;
+
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     describe('render', () => {
         it('should render the container', () => {
-            const component = mountedAdminPage(PROPS);
-            const expected = 1;
-            const actual = component.find('.admin-page__container').length;
+            wrapper = mountedAdminPage(PROPS);
+            const actual = wrapper.find('.admin-page__container');
 
-            expect(actual).toEqual(expected)
+            expect(actual.exists()).toBe(true);
         });
     });
 });

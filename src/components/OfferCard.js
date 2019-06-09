@@ -3,38 +3,36 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-// TODO: Move styles to css
-const styles = {
-    card: {
-        qualified: {
-            marginTop: '20px',
-            backgroundColor: '#36a04c',
-            color: 'white',
-            fontWeight: '500'
-        },
-        notQualified: {
-            marginTop: '20px',
-            backgroundColor: '#bf4203',
-            color: 'white',
-            fontWeight: '500'
-        },
+import './offerCard.css';
+
+const overrideStyles = {
+    notQualified: {
+        backgroundColor: '#bf4203',
+        color: 'white',
+    },
+    qualified: {
+        backgroundColor: '#36a04c',
+        color: 'white',
     },
 };
 
 const OfferCard = ({offerAmount}) => {
+    let className;
     let style;
     let text;
 
     if (offerAmount) {
-        style = styles.card.qualified;
+        className = 'offer_card--qualified';
+        style = overrideStyles.qualified;
         text = `Congrats! We can offer you a monthly rent of $${offerAmount}.`;
     } else {
-        style = styles.card.notQualified;
-        text = 'Sorry, but we are unable to make an offer on this property.'
+        className = 'offer_card--not-qualified';
+        style = overrideStyles.notQualified;
+        text = 'Sorry, but we are unable to make an offer on this property.';
     }
 
     return (
-        <Card style={style}>
+        <Card className={className} style={style}>
             <CardContent>
                 {text}
             </CardContent>

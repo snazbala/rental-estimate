@@ -7,8 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-// TODO: Move styles to css
-const styles = {
+// necessary to do inline to override Material UI styles
+const overrideStyles = {
     selectField: {
         margin: '-15px 15px 15px 0px',
     },
@@ -40,7 +40,7 @@ const NumBedrooms = ({value, onChange}) => {
     const menuItems = getMenuItems(10, "# Bedrooms");
 
     return (
-        <FormControl style={styles.selectField}>
+        <FormControl style={overrideStyles.selectField}>
             <h4># of Bedrooms*</h4>
             <Select
                 value={value}
@@ -58,7 +58,7 @@ const NumBathrooms = ({value, onChange}) => {
     const menuItems = getMenuItems(10, "# Bathrooms");
 
     return (
-        <FormControl style={styles.selectField}>
+        <FormControl style={overrideStyles.selectField}>
             <h4># of Bathrooms*</h4>
             <Select
                 value={value}
@@ -73,7 +73,7 @@ const NumBathrooms = ({value, onChange}) => {
 };
 
 const SquareFootage = ({value, onChange}) => (
-    <FormControl style={styles.sqFtField}>
+    <FormControl style={overrideStyles.sqFtField}>
         <h4>Square Ft*</h4>
         <TextField
             name="Square Footage"

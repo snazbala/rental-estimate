@@ -1,7 +1,11 @@
-.pad-top {
-  padding-top: 10px;
+.app__menu {
+    text-align: center;
+    margin: 20px 0px 20px 0px;
+    font-weight: 100;
 }
 
-.pad-bot {
-  padding-bottom: 10px;
+.app__list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
 }

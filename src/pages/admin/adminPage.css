@@ -1,0 +1,12 @@
+.admin-page__container {
+    margin-bottom: 100px;
+}
+
+.admin_page__title {
+    margin: 40px;
+}
+
+.admin_page__paper {
+    width: 100%;
+    overflow-x: auto;
+}

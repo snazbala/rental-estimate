@@ -10,7 +10,7 @@ const saveIsLoading = (isLoading) => ({
 });
 
 const saveFormSubmitted = () => ({
-    type: 'FORM_SUCCESSFULLY_SUBMITTED',
+    type: 'SAVE_FORM_SUBMITTED',
 });
 
 const saveOfferAmount = (offer) => ({

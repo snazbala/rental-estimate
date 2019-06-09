@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -10,20 +11,7 @@ import PropertyInformation from '../../components/PropertyInformation';
 import OfferCard from '../../components/OfferCard';
 
 import {postPropertyAction} from '../../actions/offers';
-
-// TODO: Move styles to css
-const styles = {
-    submitButton: {
-        margin: '27px 0px 50px 0px',
-        width: '250px',
-    },
-    subtitle: {
-        marginBottom: '40px',
-    },
-    title: {
-        margin: '40px 0px 20px 0px',
-    },
-};
+import './offerPage.css';
 
 export class OfferPage extends React.Component {
     state = {
@@ -97,17 +85,17 @@ export class OfferPage extends React.Component {
             <div className="offer-page__container">
                 <Grid container justify="center">
                     <Grid item xs={10} md={6} xl={4}>
-                        <h2 style={styles.title}>Get a rental offer for your home!</h2>
-                        <p style={styles.subtitle}>
+                        <h2 className="offer-page__title">Get a rental offer for your home!</h2>
+                        <p className={"offer-page__subtitle"}>
                             Enter information about your property to see the monthly rent we can offer you.
                         </p>
                         <form>
-                            <h3 style={styles.header}>Your Information</h3>
+                            <h3>Your Information</h3>
                             <ContactInformation
                                 value={emailAddress}
                                 onChange={this.handleChange}
                             />
-                            <h3 style={styles.header}>Property Address</h3>
+                            <h3>Property Address</h3>
                             <AddressFields
                                 address1={address1}
                                 address2={address2}
@@ -116,7 +104,7 @@ export class OfferPage extends React.Component {
                                 zipCode={zipCode}
                                 onChange={this.handleAddressFieldChange}
                             />
-                            <h3 style={styles.header}>Property Information</h3>
+                            <h3>Property Information</h3>
                             <PropertyInformation
                                 numBedrooms={numBedrooms}
                                 numBathrooms={numBathrooms}
@@ -124,14 +112,13 @@ export class OfferPage extends React.Component {
                                 onChange={this.handleChange}
                             />
                             {offer}
-                            <div>
+                            <div className="offer-page__submit-button">
                                 <Button
-                                    className="offer-page__submit-button"
-                                    style={styles.submitButton}
                                     variant="contained"
                                     color="primary"
                                     onClick={this.handleSubmit}
                                     disabled={isLoading}
+                                    style={{width: '250px'}}
                                 >
                                     {isLoading ? <CircularProgress /> : 'Get Offer'}
                                 </Button>
@@ -144,14 +131,21 @@ export class OfferPage extends React.Component {
     }
 }
 
+OfferPage.propTypes = {
+    formSubmitted: PropTypes.bool.isRequired,
+    offerAmount: PropTypes.number,
+    isLoading: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-   formSubmitted: state.form.formSubmitted,
-   offerAmount: state.form.offerAmount,
-   isLoading: state.form.isLoading,
+    formSubmitted: state.form.formSubmitted,
+    offerAmount: state.form.offerAmount,
+    isLoading: state.form.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
     onSubmit: (formData) => dispatch(postPropertyAction(formData)),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);

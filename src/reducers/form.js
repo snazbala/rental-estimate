@@ -16,7 +16,7 @@ export default (state = DEFAULT_STATE, action) => {
                 ...state,
                 isLoading: action.payload,
             }
-        case 'FORM_SUCCESSFULLY_SUBMITTED':
+        case 'SAVE_FORM_SUBMITTED':
             return {
                 ...state,
                 formSubmitted: true,

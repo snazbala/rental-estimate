@@ -1,18 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-
-// TODO: Move styles to css
-const styles = {
-    inputField: {
-        marginBottom: '20px',
-    },
-};
+import './addressFields.css';
 
 const Address1 = ({value, onChange}) => (
     <TextField
         className="address-fields__address1"
-        style={styles.inputField}
         name="Address 1"
         label="Address 1"
         fullWidth={true}
@@ -27,7 +20,6 @@ const Address1 = ({value, onChange}) => (
 const Address2 = ({value, onChange}) => (
     <TextField
         className="address-fields__address2"
-        style={styles.inputField}
         name="Address 2"
         label="Address 2"
         fullWidth={true}
@@ -41,7 +33,6 @@ const Address2 = ({value, onChange}) => (
 const City = ({value, onChange}) => (
     <TextField
         className="address-fields__city"
-        style={styles.inputField}
         name="City"
         label="City"
         fullWidth={true}
@@ -56,7 +47,6 @@ const City = ({value, onChange}) => (
 const State = ({value, onChange}) => (
     <TextField
         className="address-fields__state"
-        style={styles.inputField}
         name="State"
         label="State"
         fullWidth={true}
@@ -71,7 +61,6 @@ const State = ({value, onChange}) => (
 const ZipCode = ({value, onChange}) => (
     <TextField
         className="address-fields__zip-code"
-        style={styles.inputField}
         name="Zip Code"
         label="Zip Code"
         fullWidth={true}
@@ -84,7 +73,7 @@ const ZipCode = ({value, onChange}) => (
 );
 
 const AddressFields = ({address1, address2, city, state, zipCode, onChange}) => (
-    <div>
+    <div className="address-fields__container">
         <Address1 value={address1} onChange={onChange} />
         <Address2 value={address2} onChange={onChange} />
         <City value={city} onChange={onChange} />
