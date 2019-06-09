@@ -1,12 +1,12 @@
 import React from 'react';
-import {EstimatePage} from './EstimatePage';
+import {OfferPage} from './OfferPage';
 import {mount} from 'enzyme';
 
-const mountedEstimatePage = (overrideProps) => (
-    mount(<EstimatePage {...overrideProps} />)
+const mountedOfferPage = (overrideProps) => (
+    mount(<OfferPage {...overrideProps} />)
 );
 
-describe('estimate page', () => {
+describe('offer page', () => {
     let wrapper;
 
     afterEach(() => {
@@ -15,22 +15,22 @@ describe('estimate page', () => {
 
     describe('render', () => {
         it('should render the container', () => {
-            wrapper = mountedEstimatePage();
-            const actual = wrapper.find('.estimate-page__container');
+            wrapper = mountedOfferPage();
+            const actual = wrapper.find('.offer-page__container');
 
             expect(actual.exists()).toBe(true);
         });
 
         describe('form', () => {
             it('should render an email input field', () => {
-                wrapper = mountedEstimatePage();
+                wrapper = mountedOfferPage();
                 const actual = wrapper.find('.contact-information__email');
 
                 expect(actual.exists()).toBe(true);
             });
 
             it('should render each of the address input fields', () => {
-                wrapper = mountedEstimatePage();
+                wrapper = mountedOfferPage();
                 const address1 = wrapper.find('.address-fields__address1');
                 const address2 = wrapper.find('.address-fields__address2');
                 const city = wrapper.find('.address-fields__city');
@@ -45,7 +45,7 @@ describe('estimate page', () => {
             });
 
             it('should render each of the property information fields', () => {
-                wrapper = mountedEstimatePage();
+                wrapper = mountedOfferPage();
                 const numBeds = wrapper.find('.property-information__num-beds');
                 const numBaths = wrapper.find('.property-information__num-baths');
                 const sqFt = wrapper.find('.property-information__sq-ft');
@@ -56,12 +56,12 @@ describe('estimate page', () => {
             });
 
             it('should render a submit button', () => {
-                wrapper = mountedEstimatePage();
-                const actual = wrapper.find('.estimate-page__submit-button');
+                wrapper = mountedOfferPage();
+                const actual = wrapper.find('.offer-page__submit-button');
                 // the button wrapper is nested within several, just pick the first
                 // to verify the text
                 const text = actual.at(0).text();
-                const expectedText = 'Get Estimate';
+                const expectedText = 'Get Offer';
 
                 expect(actual.exists()).toBe(true);
                 expect(text).toEqual(expectedText);
@@ -71,7 +71,7 @@ describe('estimate page', () => {
 
     describe('lifecycle', () => {
         xit('should update the state when fields are updated', () => {
-            wrapper = mountedEstimatePage();
+            wrapper = mountedOfferPage();
             const field = wrapper.find('.contact-information__email');
 
             // simulate typing into the field
@@ -82,7 +82,7 @@ describe('estimate page', () => {
         });
 
         it('should call the submit handler when the submit button is clicked', () => {
-            wrapper = mountedEstimatePage();
+            wrapper = mountedOfferPage();
         });
 
         xit('should not allow you to submit without all required fields', () => {

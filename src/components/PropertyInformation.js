@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
+// TODO: Move styles to css
 const styles = {
     selectField: {
         margin: '-15px 15px 15px 0px',

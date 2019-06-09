@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+// TODO: Move styles to css
 const styles = {
     card: {
         qualified: {
@@ -20,30 +21,29 @@ const styles = {
     },
 };
 
-const EstimateCard = ({isQualified, estimateAmount}) => {
-    let style;;
+const OfferCard = ({offerAmount}) => {
+    let style;
     let text;
 
-    if (isQualified) {
+    if (offerAmount) {
         style = styles.card.qualified;
-        text = `Congrats! We can offer you a monthly rent of $${estimateAmount}.`;
+        text = `Congrats! We can offer you a monthly rent of $${offerAmount}.`;
     } else {
         style = styles.card.notQualified;
         text = 'Sorry, but we are unable to make an offer on this property.'
     }
 
     return (
-    <Card style={style}>
-        <CardContent>
-            {text}
-        </CardContent>
-    </Card>
-)
+        <Card style={style}>
+            <CardContent>
+                {text}
+            </CardContent>
+        </Card>
+    );
 };
 
-EstimateCard.propTypes = {
-    isQualified: PropTypes.bool.isRequired,
-    estimateAmount: PropTypes.number,
+OfferCard.propTypes = {
+    offerAmount: PropTypes.number,
 };
 
-export default EstimateCard;
+export default OfferCard;

@@ -1,10 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-import EstimatePage from './pages/estimate/EstimatePage';
+import OfferPage from './pages/offer/OfferPage';
 import AdminPage from './pages/admin/AdminPage';
 import './App.css';
 
+// TODO: move styles to css
 const styles = {
     menu: {
         textAlign: 'center',
@@ -32,7 +33,7 @@ const App = () => (
         <div>
             <Menu />
             <hr />
-            <Route exact path="/" component={EstimatePage} />
+            <Route exact path="/" component={OfferPage} />
             <Route path="/admin" component={AdminPage} />
         </div>
     </Router>

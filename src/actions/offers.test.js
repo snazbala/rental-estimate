@@ -1,6 +1,6 @@
-// TODO: Write tests for getEstimateAction
+// TODO: Write tests for postPropertyAndGetOfferAction
 
-describe('getEstimateAction', () => {
+describe('postPropertyAndGetOfferAction', () => {
     describe('a qualified offer', () => {
         xit('should dispatch the correct actions', () => {
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
+// TODO: Move styles to css
 const ContactInformation = ({value, onChange}) => (
     <TextField
         className="contact-information__email"

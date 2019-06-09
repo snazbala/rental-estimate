@@ -2,28 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ContactInformation from '../../components/ContactInformation';
 import AddressFields from '../../components/AddressFields';
 import PropertyInformation from '../../components/PropertyInformation';
-import EstimateCard from '../../components/EstimateCard';
+import OfferCard from '../../components/OfferCard';
 
-import {getEstimateAction} from '../../actions/estimate';
+import {postPropertyAction} from '../../actions/offers';
 
-const EMPTY_FORM_STATE = {
-    emailAddress: '',
-    address: {
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zipCode: '',
-    },
-    numBedrooms: 0,
-    numBathrooms: 0,
-    sqFt: '',
-};
-
+// TODO: Move styles to css
 const styles = {
     submitButton: {
         margin: '27px 0px 50px 0px',
@@ -37,10 +25,22 @@ const styles = {
     },
 };
 
-export class EstimatePage extends React.Component {
-    state = EMPTY_FORM_STATE;
+export class OfferPage extends React.Component {
+    state = {
+        emailAddress: '',
+        address: {
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zipCode: '',
+        },
+        numBedrooms: 0,
+        numBathrooms: 0,
+        sqFt: '',
+    };
 
-    _handleAddressFieldChange = (name) => (e) => {
+    handleAddressFieldChange = (name) => (e) => {
         this.setState({
             ...this.state,
             address: {
@@ -51,7 +51,7 @@ export class EstimatePage extends React.Component {
         return;
     };
 
-    _handleChange = (name) => (e) => {
+    handleChange = (name) => (e) => {
         this.setState({
             ...this.state,
             [name]: e.target.value,
@@ -59,9 +59,11 @@ export class EstimatePage extends React.Component {
         return;
     }
 
-    _handleSubmit = () => {
+    handleSubmit = () => {
+        if (this.props.isLoading) {
+            return;
+        }
         this.props.onSubmit(this.state);
-        this.setState({...EMPTY_FORM_STATE});
     }
 
     render() {
@@ -80,27 +82,30 @@ export class EstimatePage extends React.Component {
         } = this.state;
 
         const {
-            estimateAmount,
-            isQualified,
+            formSubmitted,
+            offerAmount,
+            isLoading,
         } = this.props;
 
-        let estimate;
+        let offer;
 
-        if (isQualified !== undefined) {
-            estimate = <EstimateCard isQualified={isQualified} estimateAmount={estimateAmount} />
+        if (formSubmitted) {
+            offer = <OfferCard offerAmount={offerAmount} />
         }
 
         return (
-            <div className="estimate-page__container">
+            <div className="offer-page__container">
                 <Grid container justify="center">
                     <Grid item xs={10} md={6} xl={4}>
-                        <h2 style={styles.title}>Get a rental estimate for your home!</h2>
-                        <p style={styles.subtitle}>Enter information about your property to see the monthly rent we can offer you.</p>
+                        <h2 style={styles.title}>Get a rental offer for your home!</h2>
+                        <p style={styles.subtitle}>
+                            Enter information about your property to see the monthly rent we can offer you.
+                        </p>
                         <form>
                             <h3 style={styles.header}>Your Information</h3>
                             <ContactInformation
                                 value={emailAddress}
-                                onChange={this._handleChange}
+                                onChange={this.handleChange}
                             />
                             <h3 style={styles.header}>Property Address</h3>
                             <AddressFields
@@ -109,25 +114,26 @@ export class EstimatePage extends React.Component {
                                 city={city}
                                 state={state}
                                 zipCode={zipCode}
-                                onChange={this._handleAddressFieldChange}
+                                onChange={this.handleAddressFieldChange}
                             />
                             <h3 style={styles.header}>Property Information</h3>
                             <PropertyInformation
                                 numBedrooms={numBedrooms}
                                 numBathrooms={numBathrooms}
                                 sqFt={sqFt}
-                                onChange={this._handleChange}
+                                onChange={this.handleChange}
                             />
-                            {estimate}
+                            {offer}
                             <div>
                                 <Button
-                                    className="estimate-page__submit-button"
+                                    className="offer-page__submit-button"
                                     style={styles.submitButton}
                                     variant="contained"
                                     color="primary"
-                                    onClick={this._handleSubmit}
+                                    onClick={this.handleSubmit}
+                                    disabled={isLoading}
                                 >
-                                    Get Estimate
+                                    {isLoading ? <CircularProgress /> : 'Get Offer'}
                                 </Button>
                             </div>
                         </form>
@@ -139,12 +145,13 @@ export class EstimatePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-   estimateAmount: state.app.estimateAmount,
-   isQualified: state.app.isQualified,
+   formSubmitted: state.form.formSubmitted,
+   offerAmount: state.form.offerAmount,
+   isLoading: state.form.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: (formData) => dispatch(getEstimateAction(formData)),
+    onSubmit: (formData) => dispatch(postPropertyAction(formData)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EstimatePage);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);
