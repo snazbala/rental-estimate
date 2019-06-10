@@ -16,7 +16,7 @@ const overrideStyles = {
     },
 };
 
-const OfferCard = ({offerAmount}) => {
+const OfferCard = ({ offerAmount }) => {
     let className;
     let style;
     let text;
@@ -33,9 +33,7 @@ const OfferCard = ({offerAmount}) => {
 
     return (
         <Card className={className} style={style}>
-            <CardContent>
-                {text}
-            </CardContent>
+            <CardContent>{text}</CardContent>
         </Card>
     );
 };

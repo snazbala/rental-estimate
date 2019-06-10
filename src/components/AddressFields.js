@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import './addressFields.css';
 
-const Address1 = ({value, onChange}) => (
+const Address1 = ({ value, onChange }) => (
     <TextField
         className="address-fields__address1"
         name="Address 1"
@@ -17,7 +17,7 @@ const Address1 = ({value, onChange}) => (
     />
 );
 
-const Address2 = ({value, onChange}) => (
+const Address2 = ({ value, onChange }) => (
     <TextField
         className="address-fields__address2"
         name="Address 2"
@@ -30,7 +30,7 @@ const Address2 = ({value, onChange}) => (
     />
 );
 
-const City = ({value, onChange}) => (
+const City = ({ value, onChange }) => (
     <TextField
         className="address-fields__city"
         name="City"
@@ -44,7 +44,7 @@ const City = ({value, onChange}) => (
     />
 );
 
-const State = ({value, onChange}) => (
+const State = ({ value, onChange }) => (
     <TextField
         className="address-fields__state"
         name="State"
@@ -58,7 +58,7 @@ const State = ({value, onChange}) => (
     />
 );
 
-const ZipCode = ({value, onChange}) => (
+const ZipCode = ({ value, onChange }) => (
     <TextField
         className="address-fields__zip-code"
         name="Zip Code"
@@ -72,7 +72,7 @@ const ZipCode = ({value, onChange}) => (
     />
 );
 
-const AddressFields = ({address1, address2, city, state, zipCode, onChange}) => (
+const AddressFields = ({ address1, address2, city, state, zipCode, onChange }) => (
     <div className="address-fields__container">
         <Address1 value={address1} onChange={onChange} />
         <Address2 value={address2} onChange={onChange} />

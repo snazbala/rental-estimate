@@ -1,10 +1,10 @@
-import {postPropertyApi, getOfferHistoryApi} from '../api/properties';
+import { postPropertyApi, getOfferHistoryApi } from '../api/properties';
 
 const ERROR_MESSAGE = `
     Could not get offer.
     Please check that you have filled in all required fields and try again.`;
 
-const saveIsLoading = (isLoading) => ({
+const saveIsLoading = isLoading => ({
     type: 'SAVE_IS_LOADING',
     payload: isLoading,
 });
@@ -13,39 +13,44 @@ const saveFormSubmitted = () => ({
     type: 'SAVE_FORM_SUBMITTED',
 });
 
-const saveOfferAmount = (offer) => ({
+const saveOfferAmount = offer => ({
     type: 'SAVE_OFFER_AMOUNT',
     payload: offer,
 });
 
-const saveOfferHistory = (offers) => ({
+const saveOfferHistory = offers => ({
     type: 'SAVE_OFFER_HISTORY',
     payload: offers,
 });
 
+const saveOfferHistoryIsLoading = isLoading => ({
+    type: 'SAVE_OFFER_HISTORY_IS_LOADING',
+    payload: isLoading,
+});
+
 /**
-* Since the API that returns the offer is hard coded for now,
-* and will ALWAYS return an offer let's use a randomizer to
-* make this more interesting and sometimes return 0 so we can see
-* the negative case in the UI.
-*/
-const getRandomizedOffer = (offer) => {
+ * Since the API that returns the offer is hard coded for now,
+ * and will ALWAYS return an offer let's use a randomizer to
+ * make this more interesting and sometimes return 0 so we can see
+ * the negative case in the UI.
+ */
+const getRandomizedOffer = offer => {
     const randomizer = Math.floor(Math.random() * Math.floor(10));
 
     if (randomizer > 2) {
-        return offer
+        return offer;
     }
     return 0;
 };
 
-export const postPropertyAction = (formData) => async (dispatch) => {
+export const postPropertyAction = formData => async dispatch => {
     let response;
 
     dispatch(saveIsLoading(true));
 
     try {
         response = await postPropertyApi(formData);
-    } catch(e) {
+    } catch (e) {
         alert(ERROR_MESSAGE);
         dispatch(saveIsLoading(false));
         return;
@@ -61,8 +66,11 @@ export const postPropertyAction = (formData) => async (dispatch) => {
     }
 };
 
-export const getOfferHistoryAction = () => async (dispatch) => {
+export const getOfferHistoryAction = () => async dispatch => {
+    dispatch(saveOfferHistoryIsLoading(true));
+
     const offers = await getOfferHistoryApi();
 
+    dispatch(saveOfferHistoryIsLoading(false));
     dispatch(saveOfferHistory(offers));
 };

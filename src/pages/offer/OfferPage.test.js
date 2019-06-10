@@ -1,6 +1,6 @@
 import React from 'react';
-import {OfferPage} from './OfferPage';
-import {mount} from 'enzyme';
+import { OfferPage } from './OfferPage';
+import { mount } from 'enzyme';
 
 const PROPS = {
     formSubmitted: false,
@@ -8,9 +8,7 @@ const PROPS = {
     onSubmit: jest.fn(),
 };
 
-const mountedOfferPage = (overrideProps) => (
-    mount(<OfferPage {...overrideProps} />)
-);
+const mountedOfferPage = overrideProps => mount(<OfferPage {...overrideProps} />);
 
 describe('offer page', () => {
     let wrapper;
@@ -81,7 +79,7 @@ describe('offer page', () => {
             const field = wrapper.find('.contact-information__email');
 
             // simulate typing into the field
-            field.at(0).prop('onChange')({target: {value: 'test@email.com'}});
+            field.at(0).prop('onChange')({ target: { value: 'test@email.com' } });
 
             // TODO: investigate 'state() can only be called on class components' error here
             expect(wrapper.state('emailAddress')).toEqual('test@email.com');

@@ -1,15 +1,13 @@
 import React from 'react';
-import {AdminPage} from './AdminPage';
-import {mount} from 'enzyme';
+import { AdminPage } from './AdminPage';
+import { mount } from 'enzyme';
 
 const PROPS = {
     offers: [],
-    getOffers: jest.fn()
+    getOffers: jest.fn(),
 };
 
-const mountedAdminPage = (overrideProps) => (
-    mount(<AdminPage {...overrideProps} />)
-);
+const mountedAdminPage = overrideProps => mount(<AdminPage {...overrideProps} />);
 
 describe('admin page', () => {
     let wrapper;

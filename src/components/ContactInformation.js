@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 import './contactInformation.css';
 
-const ContactInformation = ({value, onChange}) => (
+const ContactInformation = ({ value, onChange }) => (
     <div className="contact-information__email">
         <TextField
             type="email"

@@ -10,3 +10,7 @@
     width: 100%;
     overflow-x: auto;
 }
+
+.admin_page__loader {
+    text-align: center;
+}

@@ -23,21 +23,25 @@ const getMenuItems = (max, placeholder) => {
 
     if (placeholder) {
         menuItems.push(
-            <MenuItem value="" disabled key="placeholder">{placeholder}</MenuItem>
-        )
+            <MenuItem value="" disabled key="placeholder">
+                {placeholder}
+            </MenuItem>
+        );
     }
 
     for (let i = 0; i <= max; i++) {
         menuItems.push(
-            <MenuItem value={i} key={i}>{i}</MenuItem>
+            <MenuItem value={i} key={i}>
+                {i}
+            </MenuItem>
         );
     }
 
     return menuItems;
-}
+};
 
-const NumBedrooms = ({value, onChange}) => {
-    const menuItems = getMenuItems(10, "# Bedrooms");
+const NumBedrooms = ({ value, onChange }) => {
+    const menuItems = getMenuItems(10, '# Bedrooms');
 
     return (
         <FormControl style={overrideStyles.selectField}>
@@ -54,8 +58,8 @@ const NumBedrooms = ({value, onChange}) => {
     );
 };
 
-const NumBathrooms = ({value, onChange}) => {
-    const menuItems = getMenuItems(10, "# Bathrooms");
+const NumBathrooms = ({ value, onChange }) => {
+    const menuItems = getMenuItems(10, '# Bathrooms');
 
     return (
         <FormControl style={overrideStyles.selectField}>
@@ -72,7 +76,7 @@ const NumBathrooms = ({value, onChange}) => {
     );
 };
 
-const SquareFootage = ({value, onChange}) => (
+const SquareFootage = ({ value, onChange }) => (
     <FormControl style={overrideStyles.sqFtField}>
         <h4>Square Ft*</h4>
         <TextField
@@ -87,24 +91,12 @@ const SquareFootage = ({value, onChange}) => (
     </FormControl>
 );
 
-const PropertyInformation = ({numBedrooms, numBathrooms, sqFt, onChange}) => (
+const PropertyInformation = ({ numBedrooms, numBathrooms, sqFt, onChange }) => (
     <Grid container className="property-information__container">
         <Grid item xs={12}>
-            <NumBedrooms
-                className="property-information__num-beds"
-                value={numBedrooms}
-                onChange={onChange}
-            />
-            <NumBathrooms
-                className="property-information__num-baths"
-                value={numBathrooms}
-                onChange={onChange}
-            />
-            <SquareFootage
-                className="property-information__sq-ft"
-                value={sqFt}
-                onChange={onChange}
-            />
+            <NumBedrooms className="property-information__num-beds" value={numBedrooms} onChange={onChange} />
+            <NumBathrooms className="property-information__num-baths" value={numBathrooms} onChange={onChange} />
+            <SquareFootage className="property-information__sq-ft" value={sqFt} onChange={onChange} />
         </Grid>
     </Grid>
 );
@@ -117,4 +109,3 @@ PropertyInformation.propTypes = {
 };
 
 export default PropertyInformation;
-

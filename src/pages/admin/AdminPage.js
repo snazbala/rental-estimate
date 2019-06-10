@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
@@ -8,8 +8,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {getOfferHistoryAction} from '../../actions/offers';
+import { getOfferHistoryAction } from '../../actions/offers';
 import './adminPage.css';
 
 const OffersTableHead = () => (
@@ -33,12 +34,10 @@ const OffersTableHead = () => (
     </TableHead>
 );
 
-const getRows = (offers) => (
-    offers.map((offer) => {
+const getRows = offers =>
+    offers.map(offer => {
         // MongoDB ids are hashed timestamps
-        const createdDateObj = new Date(
-            parseInt(offer._id.substring(0, 8), 16) * 1000
-        );
+        const createdDateObj = new Date(parseInt(offer._id.substring(0, 8), 16) * 1000);
 
         return (
             <TableRow key={offer._id}>
@@ -60,16 +59,13 @@ const getRows = (offers) => (
                 <TableCell>{offer.estimate.renterRent}</TableCell>
             </TableRow>
         );
-    })
-);
+    });
 
-const OffersTable = ({offers}) => (
+const OffersTable = ({ offers }) => (
     <Paper className="admin_page__paper">
         <Table>
             <OffersTableHead />
-            <TableBody>
-                {getRows(offers)}
-            </TableBody>
+            <TableBody>{getRows(offers)}</TableBody>
         </Table>
     </Paper>
 );
@@ -82,8 +78,13 @@ export class AdminPage extends React.Component {
     }
 
     render() {
-        const {offers} = this.props;
+        const { isLoading, offers } = this.props;
         let table;
+        let loadingSpinner;
+
+        if (isLoading) {
+            loadingSpinner = <CircularProgress />;
+        }
 
         if (offers.length > 0) {
             table = <OffersTable offers={offers} />;
@@ -94,6 +95,7 @@ export class AdminPage extends React.Component {
                 <Grid container justify="center">
                     <Grid item xs={10}>
                         <h2 className="admin_page__title">Offer History</h2>
+                        <div className="admin_page__loader">{loadingSpinner}</div>
                         {table}
                     </Grid>
                 </Grid>
@@ -107,12 +109,16 @@ AdminPage.propTypes = {
     getOffers: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
+    isLoading: state.admin.isLoading,
     offers: state.admin.offers,
 });
 
 const mapDispatchToProps = dispatch => ({
     getOffers: () => dispatch(getOfferHistoryAction()),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AdminPage);
